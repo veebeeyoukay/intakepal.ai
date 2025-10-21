@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "title": "Conoce a Allie, tu IntakePal",
+    "subtitle": "El primer paso más amigable en el cuidado",
+    "features": [
+      "Admisión previa a la visita por voz, texto o web — sin formularios en papel",
+      "Elegibilidad en tiempo real + OCR de ID/seguro",
+      "Escritura al EHR (demografía, consentimientos, historias)",
+      "Español + accesibilidad incorporados"
+    ],
+    "ctaPrimary": "Comenzar piloto de Florida",
+    "ctaSecondary": "Ver demo de 3 minutos"
+  },
+  "consent": {
+    "types": [
+      {
+        "id": "HIPAA_NPP",
+        "label": "Reconozco el Aviso de Prácticas de Privacidad de HIPAA",
+        "description": "Este aviso explica cómo se puede usar y divulgar su información de salud."
+      },
+      {
+        "id": "CONSENT_TREAT",
+        "label": "Consiento el tratamiento",
+        "description": "Doy permiso para recibir atención y tratamiento de esta práctica."
+      },
+      {
+        "id": "FIN_RESP",
+        "label": "Acepto la responsabilidad financiera",
+        "description": "Entiendo que soy responsable de los cargos no cubiertos por el seguro."
+      },
+      {
+        "id": "TCPA",
+        "label": "Consiento SMS/voz según TCPA",
+        "description": "Acepto recibir mensajes de texto y llamadas sobre mi atención. Responda STOP para cancelar."
+      }
+    ]
+  },
+  "steps": {
+    "verify": {
+      "title": "Bienvenido a su admisión segura",
+      "description": "Le enviaremos un código de verificación para comenzar.",
+      "phoneLabel": "Número de móvil",
+      "otpLabel": "Código de verificación",
+      "button": "Continuar"
+    },
+    "consent": {
+      "title": "Avisos y Consentimientos",
+      "description": "Por favor revise y acepte lo siguiente.",
+      "buttonBack": "Atrás",
+      "buttonAccept": "Acepto"
+    },
+    "coverage": {
+      "title": "Cobertura de Seguro",
+      "description": "Sube fotos de tu tarjeta de seguro (frente y reverso).",
+      "frontLabel": "Frente de la tarjeta",
+      "backLabel": "Reverso de la tarjeta",
+      "uploadPrompt": "Clic para subir",
+      "buttonBack": "Atrás",
+      "buttonVerify": "Verificar Cobertura"
+    },
+    "history": {
+      "title": "Historia Médica",
+      "description": "Algunas preguntas rápidas para preparar su visita.",
+      "allergiesLabel": "¿Tiene alguna alergia?",
+      "allergiesPlaceholder": "Ninguna, o listarlas",
+      "medicationsLabel": "¿Medicamentos actuales?",
+      "medicationsPlaceholder": "Ninguno, o listarlos",
+      "reasonLabel": "¿Motivo de la visita?",
+      "reasonPlaceholder": "Revisión anual, preocupación, etc.",
+      "buttonBack": "Atrás",
+      "buttonContinue": "Continuar"
+    },
+    "review": {
+      "title": "Revisar y Enviar",
+      "description": "Por favor confirme su información antes de enviar.",
+      "patientLabel": "Paciente",
+      "insuranceLabel": "Seguro",
+      "historyLabel": "Historia",
+      "allergiesLabel": "Alergias:",
+      "medicationsLabel": "Medicamentos:",
+      "reasonLabel": "Motivo:",
+      "coverageActive": "Cobertura Activa",
+      "coverageIssue": "Problema de Cobertura",
+      "coverageActiveDesc": "Copago estimado: ${{copay}}. Deducible restante: ${{deductible}}.",
+      "coverageIssueDesc": "Confirmaremos los detalles con su proveedor antes de su visita.",
+      "buttonBack": "Atrás",
+      "buttonSubmit": "Enviar Admisión"
+    }
+  },
+  "common": {
+    "demoNote": "MODO DEMO: No se transmiten datos reales.",
+    "loading": "Cargando...",
+    "verifying": "Verificando...",
+    "checking": "Verificando...",
+    "submitting": "Enviando...",
+    "none": "Ninguno"
+  }
+}

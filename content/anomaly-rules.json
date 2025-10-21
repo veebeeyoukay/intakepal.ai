@@ -1,0 +1,115 @@
+{
+  "rules": [
+    {
+      "type": "INSURANCE_INACTIVE",
+      "severity": "high",
+      "description": "Insurance policy is inactive or expired per 271 response",
+      "trigger": {
+        "source": "eligibility_check",
+        "condition": "status === 'inactive' || status === 'terminated'"
+      },
+      "recommendedAction": "Contact patient to verify current coverage before visit. May require updated card or different payer.",
+      "staffAlert": true,
+      "patientMessage": "We encountered an issue verifying your insurance. Please call us to confirm your coverage.",
+      "blockSubmission": false
+    },
+    {
+      "type": "INSURANCE_MISMATCH",
+      "severity": "medium",
+      "description": "Member ID or DOB doesn't match payer records",
+      "trigger": {
+        "source": "eligibility_check",
+        "condition": "responseCode === 'MISMATCH' || responseCode === 'NOT_FOUND'"
+      },
+      "recommendedAction": "Verify member ID and DOB with patient. Request updated insurance card.",
+      "staffAlert": true,
+      "patientMessage": "We need to verify your insurance details. Our team will reach out shortly.",
+      "blockSubmission": false
+    },
+    {
+      "type": "DUPLICATE_PATIENT",
+      "severity": "high",
+      "description": "Potential duplicate patient record detected by phone + DOB match",
+      "trigger": {
+        "source": "patient_lookup",
+        "condition": "existingPatient.phone === newPatient.phone && existingPatient.dob === newPatient.dob"
+      },
+      "recommendedAction": "Review existing record before creating new patient. Merge if confirmed duplicate.",
+      "staffAlert": true,
+      "patientMessage": null,
+      "blockSubmission": false
+    },
+    {
+      "type": "MED_ALLERGY_CONFLICT",
+      "severity": "high",
+      "description": "Self-reported medication conflicts with self-reported allergy",
+      "trigger": {
+        "source": "questionnaire_response",
+        "condition": "medications includes allergen from allergies list"
+      },
+      "recommendedAction": "Flag for clinician review. Confirm with patient before prescribing.",
+      "staffAlert": true,
+      "patientMessage": "We noticed a potential medication concern. Our clinical team will review before your visit.",
+      "blockSubmission": false
+    },
+    {
+      "type": "MISSING_REFERRAL",
+      "severity": "medium",
+      "description": "Payer requires referral but none on file",
+      "trigger": {
+        "source": "eligibility_check",
+        "condition": "referralRequired === true && referralOnFile === false"
+      },
+      "recommendedAction": "Request referral from PCP before visit. May affect coverage.",
+      "staffAlert": true,
+      "patientMessage": "Your insurance requires a referral. Please obtain one from your primary care doctor before your visit.",
+      "blockSubmission": false
+    },
+    {
+      "type": "MISSING_AUTH",
+      "severity": "medium",
+      "description": "Service requires prior authorization",
+      "trigger": {
+        "source": "eligibility_check",
+        "condition": "authRequired === true && authOnFile === false"
+      },
+      "recommendedAction": "Initiate prior auth request. May delay appointment.",
+      "staffAlert": true,
+      "patientMessage": "Your insurance requires prior authorization for this service. We'll work on this and reach out if needed.",
+      "blockSubmission": false
+    },
+    {
+      "type": "RED_FLAG_CLINICAL",
+      "severity": "critical",
+      "description": "Questionnaire response indicates urgent clinical concern (OB-GYN red flags)",
+      "trigger": {
+        "source": "questionnaire_response",
+        "condition": "answers include keywords: ['heavy bleeding' + 'dizziness', 'severe pain', 'chest pain']"
+      },
+      "recommendedAction": "IMMEDIATE nurse review. May require urgent appointment or ER referral.",
+      "staffAlert": true,
+      "patientMessage": "Thank you for completing your intake. A nurse will call you shortly to discuss your concerns.",
+      "blockSubmission": false,
+      "nurseAlert": true
+    },
+    {
+      "type": "INCOMPLETE_INTAKE",
+      "severity": "low",
+      "description": "Patient started but did not complete intake",
+      "trigger": {
+        "source": "session_status",
+        "condition": "status === 'open' && lastActivity > 24 hours ago"
+      },
+      "recommendedAction": "Send reminder SMS/email with magic link.",
+      "staffAlert": false,
+      "patientMessage": null,
+      "blockSubmission": false,
+      "autoReminder": true
+    }
+  ],
+  "notes": {
+    "design": "Anomalies NEVER block patient submission. They route to staff for resolution.",
+    "ml": "Phase 2+ will add ML-based anomaly detection (fuzzy duplicate matching, fraud signals, etc.).",
+    "audit": "Every anomaly detection is logged with timestamp, rule type, and patient context (no PHI in logs)."
+  }
+}

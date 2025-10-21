@@ -1,0 +1,34 @@
+{
+  "validPatient": {
+    "firstName": "Jane",
+    "lastName": "Doe (DEMO)",
+    "dob": "1985-06-15",
+    "phone": "+1-555-0123",
+    "email": "jane.demo@example.com",
+    "lang": "en"
+  },
+  "spanishPatient": {
+    "firstName": "Maria",
+    "lastName": "García (DEMO)",
+    "dob": "1990-03-22",
+    "phone": "+1-555-0456",
+    "email": "maria.demo@example.com",
+    "lang": "es"
+  },
+  "duplicatePatient": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "dob": "1985-06-15",
+    "phone": "+1-555-0123",
+    "email": "jane.duplicate@example.com",
+    "lang": "en"
+  },
+  "elderlyPatient": {
+    "firstName": "Robert",
+    "lastName": "Smith (DEMO)",
+    "dob": "1945-11-08",
+    "phone": "+1-555-0789",
+    "email": "robert.demo@example.com",
+    "lang": "en"
+  }
+}

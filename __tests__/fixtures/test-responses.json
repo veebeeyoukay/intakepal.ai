@@ -1,0 +1,92 @@
+{
+  "eligibility": {
+    "active": {
+      "ok": true,
+      "status": "active",
+      "copay": "35.00",
+      "deductible": "500.00",
+      "deductibleMet": "250.00",
+      "oopMax": "3000.00",
+      "oopMet": "800.00",
+      "notes": "PCP not required. Specialist copay $50.",
+      "effectiveDate": "2025-01-01",
+      "terminationDate": null,
+      "planType": "PPO"
+    },
+    "inactive": {
+      "ok": true,
+      "status": "inactive",
+      "copay": null,
+      "deductible": null,
+      "notes": "Policy terminated as of 2024-12-31",
+      "effectiveDate": "2024-01-01",
+      "terminationDate": "2024-12-31",
+      "planType": "PPO"
+    },
+    "mismatch": {
+      "ok": false,
+      "error": "Member ID not found or DOB mismatch",
+      "status": "unknown"
+    }
+  },
+  "ehrWriteback": {
+    "success": {
+      "ok": true,
+      "writtenResources": [
+        {
+          "resourceType": "Patient",
+          "id": "Patient/test-123",
+          "status": "created"
+        },
+        {
+          "resourceType": "Coverage",
+          "id": "Coverage/test-456",
+          "status": "created"
+        },
+        {
+          "resourceType": "DocumentReference",
+          "id": "DocumentReference/test-789",
+          "status": "created",
+          "contentUrl": "https://demo.intakepal.ai/documents/test-consents.pdf"
+        },
+        {
+          "resourceType": "QuestionnaireResponse",
+          "id": "QuestionnaireResponse/test-101",
+          "status": "created"
+        }
+      ],
+      "timestamp": "2025-10-21T12:00:00Z"
+    },
+    "failure": {
+      "ok": false,
+      "error": "EHR connection timeout",
+      "timestamp": "2025-10-21T12:00:00Z"
+    }
+  },
+  "anomalies": {
+    "insuranceInactive": {
+      "type": "INSURANCE_INACTIVE",
+      "severity": "high",
+      "details": "Insurance policy is inactive or expired per 271 response",
+      "recommendedAction": "Contact patient to verify current coverage before visit"
+    },
+    "duplicatePatient": {
+      "type": "DUPLICATE_PATIENT",
+      "severity": "high",
+      "details": "Potential duplicate patient record detected by phone + DOB match",
+      "recommendedAction": "Review existing record before creating new patient"
+    },
+    "medAllergyConflict": {
+      "type": "MED_ALLERGY_CONFLICT",
+      "severity": "high",
+      "details": "Self-reported medication conflicts with self-reported allergy",
+      "recommendedAction": "Flag for clinician review"
+    },
+    "redFlagClinical": {
+      "type": "RED_FLAG_CLINICAL",
+      "severity": "critical",
+      "details": "Questionnaire response indicates urgent clinical concern",
+      "recommendedAction": "IMMEDIATE nurse review"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "templates": [
+    {
+      "id": "magic_link_email",
+      "subject": "Complete your secure intake - {{practiceName}}",
+      "preheader": "Your personalized intake link is ready",
+      "body_html": "<p>Hi,</p><p>I'm Allie, your IntakePal. You're all set to complete your new patient intake online.</p><p><a href=\"{{magicLink}}\" style=\"display:inline-block;background:#0EA5A0;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;\">Start Secure Intake</a></p><p style=\"color:#475569;font-size:14px;\">This link expires in 7 days. Prefer to call? Reach us at {{practicePhone}}.</p><p style=\"color:#475569;font-size:12px;\">This email contains no personal health information. Your data is protected within our secure platform.</p><p>— Allie<br><em>IntakePal</em></p>",
+      "body_text": "Hi,\n\nI'm Allie, your IntakePal. You're all set to complete your new patient intake online.\n\nClick here to start: {{magicLink}}\n\nThis link expires in 7 days. Prefer to call? Reach us at {{practicePhone}}.\n\n— Allie\nIntakePal",
+      "variables": ["practiceName", "magicLink", "practicePhone"],
+      "notes": "Sent after patient provides email. No PHI."
+    },
+    {
+      "id": "intake_complete_confirmation",
+      "subject": "Your intake is complete - {{practiceName}}",
+      "preheader": "We're ready for your visit",
+      "body_html": "<p>Hi {{firstName}},</p><p>Great news! Your intake with {{practiceName}} is complete.</p><p><strong>Next Steps:</strong></p><ul><li>We've verified your insurance coverage</li><li>Your information is in our system</li><li>You're all set for your appointment</li></ul><p>If your appointment isn't scheduled yet, our team will call you within 1 business day.</p><p style=\"color:#475569;font-size:14px;\">Questions? Call us at {{practicePhone}} or reply to this email.</p><p>— Allie<br><em>IntakePal</em></p>",
+      "body_text": "Hi {{firstName}},\n\nGreat news! Your intake with {{practiceName}} is complete.\n\nNext Steps:\n- We've verified your insurance coverage\n- Your information is in our system\n- You're all set for your appointment\n\nIf your appointment isn't scheduled yet, our team will call you within 1 business day.\n\nQuestions? Call us at {{practicePhone}} or reply to this email.\n\n— Allie\nIntakePal",
+      "variables": ["firstName", "practiceName", "practicePhone"],
+      "notes": "Sent after EHR write-back. firstName is minimal PHI; can be omitted if practice prefers."
+    },
+    {
+      "id": "consent_documents",
+      "subject": "Your consent documents - {{practiceName}}",
+      "preheader": "Download your signed forms",
+      "body_html": "<p>Hi {{firstName}},</p><p>Attached are your signed consent documents from {{practiceName}}:</p><ul><li>HIPAA Notice of Privacy Practices</li><li>Consent to Treatment</li><li>Financial Responsibility Agreement</li><li>TCPA Consent</li></ul><p><a href=\"{{documentUrl}}\" style=\"display:inline-block;background:#0EA5A0;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;\">Download Documents (PDF)</a></p><p style=\"color:#475569;font-size:14px;\">Keep these for your records. Questions? Call {{practicePhone}}.</p><p>— Allie<br><em>IntakePal</em></p>",
+      "body_text": "Hi {{firstName}},\n\nAttached are your signed consent documents from {{practiceName}}:\n- HIPAA Notice of Privacy Practices\n- Consent to Treatment\n- Financial Responsibility Agreement\n- TCPA Consent\n\nDownload here: {{documentUrl}}\n\nKeep these for your records. Questions? Call {{practicePhone}}.\n\n— Allie\nIntakePal",
+      "variables": ["firstName", "practiceName", "documentUrl", "practicePhone"],
+      "notes": "Sent after consent completion. PDF is password-protected or behind secure link."
+    },
+    {
+      "id": "coverage_issue_alert",
+      "subject": "Action needed: Insurance verification - {{practiceName}}",
+      "preheader": "Please contact us about your coverage",
+      "body_html": "<p>Hi {{firstName}},</p><p>We completed your intake, but we encountered an issue verifying your insurance coverage.</p><p><strong>What this means:</strong> Your policy may be inactive, or there may be a mismatch in the details we received. This is common and usually easy to resolve.</p><p><strong>Next step:</strong> Please call us at {{practicePhone}} so we can confirm your coverage before your visit.</p><p style=\"color:#475569;font-size:14px;\">Don't worry — we'll still see you for your appointment. We just need to clarify a few details.</p><p>— Allie<br><em>IntakePal</em></p>",
+      "body_text": "Hi {{firstName}},\n\nWe completed your intake, but we encountered an issue verifying your insurance coverage.\n\nWhat this means: Your policy may be inactive, or there may be a mismatch in the details we received. This is common and usually easy to resolve.\n\nNext step: Please call us at {{practicePhone}} so we can confirm your coverage before your visit.\n\nDon't worry — we'll still see you for your appointment. We just need to clarify a few details.\n\n— Allie\nIntakePal",
+      "variables": ["firstName", "practiceName", "practicePhone"],
+      "notes": "Sent when eligibility check returns inactive/unknown. Minimal PHI."
+    }
+  ],
+  "compliance": {
+    "hipaa": "Emails contain minimal PHI (first name only). Document links are password-protected or require re-authentication.",
+    "security": "All links use HTTPS. Magic links expire after 7 days or after use. Document URLs require secure token.",
+    "branding": "All emails are white-label ready. Logo and colors are tenant-configurable."
+  }
+}

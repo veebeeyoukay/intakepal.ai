@@ -1,0 +1,204 @@
+{
+  "patients": [
+    {
+      "id": "demo-patient-1",
+      "firstName": "Jane",
+      "lastName": "Doe (DEMO)",
+      "dob": "1985-06-15",
+      "phone": "+1-555-0123",
+      "email": "jane.demo@example.com",
+      "language": "en",
+      "notes": "Demo patient for testing intake flow"
+    },
+    {
+      "id": "demo-patient-2",
+      "firstName": "Maria",
+      "lastName": "Garcia (DEMO)",
+      "dob": "1990-03-22",
+      "phone": "+1-555-0456",
+      "email": "maria.demo@example.com",
+      "language": "es",
+      "notes": "Demo patient for Spanish language testing"
+    }
+  ],
+  "coverages": [
+    {
+      "patientId": "demo-patient-1",
+      "payerName": "Blue Cross Blue Shield (DEMO)",
+      "payerId": "BCBS-FL",
+      "planId": "PPO-1000",
+      "planType": "PPO",
+      "memberId": "ABC123456789",
+      "groupId": "GRP-999",
+      "status": "active",
+      "effectiveDate": "2025-01-01",
+      "copay": "35.00",
+      "deductible": "500.00",
+      "deductibleMet": "250.00",
+      "oopMax": "3000.00",
+      "notes": "PCP not required. Specialist copay $50."
+    },
+    {
+      "patientId": "demo-patient-2",
+      "payerName": "Aetna (DEMO)",
+      "payerId": "AETNA-FL",
+      "planId": "HMO-2000",
+      "planType": "HMO",
+      "memberId": "XYZ987654321",
+      "groupId": "GRP-888",
+      "status": "active",
+      "effectiveDate": "2025-01-01",
+      "copay": "20.00",
+      "deductible": "1000.00",
+      "deductibleMet": "0.00",
+      "oopMax": "5000.00",
+      "notes": "PCP referral required for specialists."
+    }
+  ],
+  "pharmacies": [
+    {
+      "id": "pharmacy-1",
+      "ncpdpId": "1234567",
+      "name": "Walgreens Pharmacy #12345 (DEMO)",
+      "phone": "+1-555-7890",
+      "address": "123 Main St, Orlando, FL 32801",
+      "city": "Orlando",
+      "state": "FL",
+      "zip": "32801"
+    },
+    {
+      "id": "pharmacy-2",
+      "ncpdpId": "2345678",
+      "name": "CVS Pharmacy #67890 (DEMO)",
+      "phone": "+1-555-7891",
+      "address": "456 Oak Ave, Tampa, FL 33602",
+      "city": "Tampa",
+      "state": "FL",
+      "zip": "33602"
+    },
+    {
+      "id": "pharmacy-3",
+      "ncpdpId": "3456789",
+      "name": "Publix Pharmacy #54321 (DEMO)",
+      "phone": "+1-555-7892",
+      "address": "789 Pine Rd, Miami, FL 33101",
+      "city": "Miami",
+      "state": "FL",
+      "zip": "33101"
+    }
+  ],
+  "questionnaires": {
+    "obgyn-new-pt-v1": {
+      "id": "obgyn-new-pt-v1",
+      "title": "OB-GYN New Patient Questionnaire",
+      "items": [
+        {
+          "linkId": "lmp",
+          "text": "Date of last menstrual period (if applicable)",
+          "type": "date",
+          "required": false
+        },
+        {
+          "linkId": "pregnant",
+          "text": "Are you currently pregnant?",
+          "type": "choice",
+          "options": ["Yes", "No", "Unsure"],
+          "required": false
+        },
+        {
+          "linkId": "contraception",
+          "text": "Current contraception method (if any)",
+          "type": "string",
+          "required": false
+        },
+        {
+          "linkId": "gyn_history",
+          "text": "Previous gynecological surgeries or procedures",
+          "type": "string",
+          "required": false
+        },
+        {
+          "linkId": "allergies",
+          "text": "Known allergies (medications, latex, etc.)",
+          "type": "string",
+          "required": true
+        },
+        {
+          "linkId": "medications",
+          "text": "Current medications (include vitamins/supplements)",
+          "type": "string",
+          "required": true
+        },
+        {
+          "linkId": "reason",
+          "text": "Reason for today's visit",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    "podiatry-new-pt-v1": {
+      "id": "podiatry-new-pt-v1",
+      "title": "Podiatry New Patient Questionnaire",
+      "items": [
+        {
+          "linkId": "foot_pain",
+          "text": "Do you have foot or ankle pain?",
+          "type": "choice",
+          "options": ["Yes", "No"],
+          "required": true
+        },
+        {
+          "linkId": "pain_location",
+          "text": "If yes, where is the pain located?",
+          "type": "string",
+          "required": false,
+          "enableWhen": "foot_pain === 'Yes'"
+        },
+        {
+          "linkId": "pain_duration",
+          "text": "How long have you had this pain?",
+          "type": "string",
+          "required": false,
+          "enableWhen": "foot_pain === 'Yes'"
+        },
+        {
+          "linkId": "diabetes",
+          "text": "Do you have diabetes?",
+          "type": "choice",
+          "options": ["Yes", "No"],
+          "required": true
+        },
+        {
+          "linkId": "circulation",
+          "text": "Do you have circulation problems?",
+          "type": "choice",
+          "options": ["Yes", "No", "Unsure"],
+          "required": true
+        },
+        {
+          "linkId": "allergies",
+          "text": "Known allergies (medications, latex, etc.)",
+          "type": "string",
+          "required": true
+        },
+        {
+          "linkId": "medications",
+          "text": "Current medications (include blood thinners)",
+          "type": "string",
+          "required": true
+        },
+        {
+          "linkId": "reason",
+          "text": "Reason for today's visit",
+          "type": "string",
+          "required": true
+        }
+      ]
+    }
+  },
+  "notes": {
+    "purpose": "Demo seed data for testing intake flows. All data is clearly marked DEMO.",
+    "privacy": "This is NOT real PHI. Used for demonstration and development only."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "templates": [
+    {
+      "id": "magic_link_initial",
+      "name": "Initial Magic Link (No PHI)",
+      "content": "Hi, I'm Allie from IntakePal. Tap to start your secure intake: {{shortLink}}. Prefer a call? Reply CALL. Reply STOP to opt out.",
+      "variables": ["shortLink"],
+      "notes": "Sent after voice call or patient opts in. No PHI."
+    },
+    {
+      "id": "reminder_incomplete",
+      "name": "Reminder - Incomplete Intake (No PHI)",
+      "content": "Hi! You started your intake with IntakePal. Finish in 5 minutes: {{shortLink}}. Questions? Reply HELP. Reply STOP to opt out.",
+      "variables": ["shortLink"],
+      "notes": "Sent 24 hours after incomplete session. No PHI."
+    },
+    {
+      "id": "confirmation_complete",
+      "name": "Confirmation - Intake Complete (No PHI)",
+      "content": "Your intake is complete! We're ready for your visit. Check your email for appointment details. Reply STOP to opt out.",
+      "variables": [],
+      "notes": "Sent after successful EHR write-back. No PHI."
+    },
+    {
+      "id": "appointment_reminder",
+      "name": "Appointment Reminder (No PHI)",
+      "content": "Reminder: Your appointment is tomorrow at {{time}}. Need to reschedule? Call us at {{practicePhone}}. Reply STOP to opt out.",
+      "variables": ["time", "practicePhone"],
+      "notes": "Sent 24 hours before appointment. No PHI (appointment time is not considered PHI in this context, but can be omitted if practice prefers)."
+    },
+    {
+      "id": "tcpa_opt_in",
+      "name": "TCPA Opt-In Confirmation",
+      "content": "You've opted in to receive text messages from {{practiceName}}. You can reply STOP at any time to opt out. Message and data rates may apply.",
+      "variables": ["practiceName"],
+      "notes": "Sent immediately after TCPA consent. Required by TCPA."
+    },
+    {
+      "id": "stop_response",
+      "name": "STOP Response (Auto)",
+      "content": "You've been unsubscribed from {{practiceName}} messages. Reply START to opt back in.",
+      "variables": ["practiceName"],
+      "notes": "Auto-reply when patient texts STOP. Required by TCPA."
+    },
+    {
+      "id": "help_response",
+      "name": "HELP Response (Auto)",
+      "content": "IntakePal by {{practiceName}}. For support, call {{practicePhone}}. Reply STOP to opt out. Message and data rates may apply.",
+      "variables": ["practiceName", "practicePhone"],
+      "notes": "Auto-reply when patient texts HELP. Required by TCPA."
+    }
+  ],
+  "compliance": {
+    "tcpa": "All messages include opt-out instructions (STOP). HELP and STOP auto-replies are implemented.",
+    "hipaa": "No PHI is transmitted via SMS. All PHI collection happens within secure web app accessed via magic link.",
+    "shortLinks": "Use HTTPS short links (e.g., via Bitly or Twilio) that expire after 7 days or after use."
+  }
+}

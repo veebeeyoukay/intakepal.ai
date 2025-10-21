@@ -1,0 +1,17 @@
+<svg width="200" height="48" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" aria-label="IntakePal">
+  <defs>
+    <style>
+      .t{font-family:Inter,system-ui,-apple-system,sans-serif;font-weight:700;font-size:24px;fill:#0F172A}
+    </style>
+  </defs>
+  <g>
+    <!-- Rounded doorway shape representing entrance -->
+    <path d="M20 38c-6 0-10-4-10-10V16c0-6 4-10 10-10s10 4 10 10v12c0 6-4 10-10 10z" fill="#0EA5A0" />
+    <!-- Allie's smile -->
+    <path d="M15 26c2 3 8 3 10 0" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <!-- Allie's eyes -->
+    <circle cx="16" cy="20" r="1.8" fill="white"/>
+    <circle cx="24" cy="20" r="1.8" fill="white"/>
+  </g>
+  <text class="t" x="44" y="30">IntakePal</text>
+</svg>
