@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,6 +34,9 @@ interface IntakeData {
 }
 
 export default function NewPatientIntake() {
+  const searchParams = useSearchParams();
+  const fromVoice = searchParams?.get('from') === 'voice';
+
   const [step, setStep] = useState<Step>("verify");
   const [data, setData] = useState<IntakeData>({
     phone: "",
@@ -45,6 +49,59 @@ export default function NewPatientIntake() {
   });
   const [eligibility, setEligibility] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [voiceDataLoaded, setVoiceDataLoaded] = useState(false);
+
+  // Load data from voice chat if coming from voice demo
+  useEffect(() => {
+    if (fromVoice && !voiceDataLoaded) {
+      try {
+        const voiceChatDataStr = sessionStorage.getItem('voiceChatData');
+        if (voiceChatDataStr) {
+          const voiceChatData = JSON.parse(voiceChatDataStr);
+
+          // Pre-fill data from voice chat
+          const updates: Partial<IntakeData> = {
+            language: voiceChatData.language || 'en',
+          };
+
+          // Pre-fill phone if collected
+          if (voiceChatData.phone) {
+            updates.phone = voiceChatData.phone;
+          }
+
+          // Pre-fill answers with name and DOB
+          const answers: Record<string, string> = {};
+          if (voiceChatData.firstName || voiceChatData.lastName) {
+            const fullName = [voiceChatData.firstName, voiceChatData.lastName]
+              .filter(Boolean)
+              .join(' ');
+            answers['name'] = fullName;
+          }
+          if (voiceChatData.dateOfBirth) {
+            answers['dob'] = voiceChatData.dateOfBirth;
+          }
+
+          if (Object.keys(answers).length > 0) {
+            updates.answers = { ...data.answers, ...answers };
+          }
+
+          updateData(updates);
+
+          // Skip verify step if we have consent
+          if (voiceChatData.consentGiven) {
+            setStep("consent");
+          }
+
+          setVoiceDataLoaded(true);
+
+          // Clear the session storage
+          sessionStorage.removeItem('voiceChatData');
+        }
+      } catch (error) {
+        console.error('Error loading voice chat data:', error);
+      }
+    }
+  }, [fromVoice, voiceDataLoaded]);
 
   const updateData = (updates: Partial<IntakeData>) => {
     setData((prev) => ({ ...prev, ...updates }));
@@ -124,6 +181,17 @@ export default function NewPatientIntake() {
 
   return (
     <div className="min-h-screen bg-[--surface-alt]">
+      {/* Voice Data Pre-fill Notice */}
+      {fromVoice && voiceDataLoaded && (
+        <Alert className="mx-auto max-w-4xl mt-4 bg-[--brand-primary]/10 border-[--brand-primary]/30">
+          <CheckCircle2 className="w-4 h-4 text-[--brand-primary]" />
+          <AlertTitle>Information loaded from voice chat</AlertTitle>
+          <AlertDescription className="text-sm">
+            We've pre-filled your information from your conversation with Allie. Please review and complete the remaining fields.
+          </AlertDescription>
+        </Alert>
+      )}
+
       {/* Header */}
       <header className="border-b border-[--border] bg-white">
         <div className="mx-auto max-w-4xl px-6 py-4 flex items-center justify-between">

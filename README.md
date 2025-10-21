@@ -6,9 +6,22 @@ A production-ready landing page and demo workflow for **IntakePal** — the frie
 
 ### Landing Page
 - **Hero Section**: Meet Allie, your IntakePal with clear CTAs
+- **Voice Chatbot Demo**: Prominent "Talk to Allie" button launches full IVR simulation
 - **Features Grid**: 4 key value propositions (no clipboards, real-time eligibility, EHR write-back, Spanish + accessibility)
 - **Trust Badges**: HIPAA, WCAG 2.2 AA, BAA-compliant, audit trail
 - **Contact Form**: Pilot signup form with success state
+
+### Voice/IVR Chatbot Demo
+A complete text-based voice IVR simulation (ready for real voice integration):
+- **Full-screen chat interface** with Allie AI assistant
+- **13-step IVR flow**: Greeting → Emergency detection → Intent classification → Identity collection → Language preference → HIPAA consent → Magic link offer → End-of-demo options
+- **Natural language processing**: Keyword-based intent detection and data extraction
+- **Emergency detection**: Safety routing for keywords like "chest pain", "bleeding", "911"
+- **Spanish language support**: Full bilingual experience with dynamic message switching
+- **Seamless handoff**: Collected data pre-fills the intake wizard
+- **Smart data extraction**: Names, dates of birth, phone numbers, email addresses from natural language
+
+Try it by clicking the prominent gradient "Talk to Allie - Try Voice Demo" button on the landing page!
 
 ### Demo Intake Flow (`/new-patient`)
 A complete 5-step patient intake wizard:
@@ -137,10 +150,12 @@ This application is built to WCAG 2.2 AA standards:
     label.tsx
     alert.tsx
     badge.tsx
-  Hero.tsx                       # Landing page hero
+    chat-message.tsx             # Chat bubbles and typing indicator
+  Hero.tsx                       # Landing page hero with voice CTA
   Features.tsx                   # Features grid
   TrustBadges.tsx                # Trust badges
   ContactForm.tsx                # Pilot signup form
+  VoiceChatbot.tsx               # Voice IVR chatbot interface
 /content
   ivr-script.md                  # Voice/IVR scripts
   sms-templates.json             # SMS templates
@@ -148,9 +163,14 @@ This application is built to WCAG 2.2 AA standards:
   anomaly-rules.json             # Anomaly detection rules
   seed-data.json                 # Sample data
   spanish-copy.json              # Spanish translations
+/hooks
+  useVoiceChat.ts                # Voice chatbot state management
 /lib
   utils.ts                       # Utility functions
   constants.ts                   # Design tokens + brand copy
+  ivr-flow.ts                    # IVR state machine and NLP logic
+/types
+  voice-chat.ts                  # Voice chatbot TypeScript types
 /public
   intakepal-logo.svg             # IntakePal logo
 ```
