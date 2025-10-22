@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { COPY } from "@/lib/constants";
 import Link from "next/link";
-import { Mic } from "lucide-react";
+import { Mic, Phone } from "lucide-react";
 import { VoiceChatbot } from "@/components/VoiceChatbot";
 
 export function Hero() {
@@ -50,18 +50,39 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2, delay: 0.3 }}
         >
-          {/* Primary Voice CTA - Extra Prominent */}
-          <Button
-            onClick={() => setIsChatOpen(true)}
-            size="lg"
-            className="w-full sm:w-auto text-lg px-8 py-6 bg-gradient-to-r from-[--brand-primary] to-[--brand-accent] hover:opacity-90 shadow-lg"
-          >
-            <Mic className="w-5 h-5 mr-2" />
-            Talk to Allie - Try Voice Demo
-          </Button>
+          {/* Primary Voice CTAs - Side by Side */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
+            {/* Call Live Voice Assistant */}
+            <Button
+              asChild
+              size="lg"
+              className="w-full sm:w-auto text-lg px-8 py-6 bg-gradient-to-r from-[--brand-primary] to-[--brand-accent] hover:opacity-90 shadow-lg"
+            >
+              <a href="tel:+19788295886">
+                <Phone className="w-5 h-5 mr-2" />
+                Call Allie Now
+              </a>
+            </Button>
+
+            {/* Text Demo */}
+            <Button
+              onClick={() => setIsChatOpen(true)}
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto text-lg px-8 py-6 border-2 border-[--brand-primary] text-[--brand-primary] hover:bg-[--brand-primary] hover:text-white shadow-md"
+            >
+              <Mic className="w-5 h-5 mr-2" />
+              Try Text Demo
+            </Button>
+          </div>
+
+          {/* Phone Number Display */}
+          <p className="text-sm text-[--muted-ink] font-medium">
+            📞 <a href="tel:+19788295886" className="text-[--brand-primary] hover:underline">+1 (978) 829-5886</a> • Available 24/7
+          </p>
 
           {/* Secondary CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full mt-2">
             <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
               <Link href="/new-patient">{COPY.hero.ctaPrimary}</Link>
             </Button>
